@@ -35,7 +35,7 @@ GTD（Getting Things Done）で管理している Markdown のワークスペー
   - スクワットは目安の 25×3 を 2回達成したが、ジャンプのある次のステップは大会まで出さない決まり
 ```
 
-数値は、ワークスペースのログと「物差し」のファイル（`gtd/004_document/ai-partner/trainer.md`）から数え直したもの。4つのスキルを動かした結果は [`notes/issue-2-trial.md`](notes/issue-2-trial.md) にある。
+数値は、ワークスペースのログと「物差し」のファイル（`gtd/006_document/ai-partner/trainer.md`）から数え直したもの。4つのスキルを動かした結果は [`notes/issue-2-trial.md`](notes/issue-2-trial.md) にある。
 
 ## 背景・課題
 
@@ -67,7 +67,7 @@ flowchart LR
   A -- 手順 --> S[.claude/skills/<br>4つのスキル]
   A -- 人物像 --> M[me/]
   A -- 読む・書く --> W[gtd/ reviews/ logs/]
-  A -- 数値 --> R[gtd/004_document/ai-partner/<br>物差し・チェックリスト]
+  A -- 数値 --> R[gtd/006_document/ai-partner/<br>物差し・チェックリスト]
 ```
 
 - **ワークスペース**: Markdown のファイルを git で管理する 1つのフォルダ。Obsidian などのアプリは要らない
@@ -103,9 +103,9 @@ claude
 | ファイル | 書くこと |
 | --- | --- |
 | `me/` の 4つ | 人物像・価値観と目標・今の状況・AI への頼み方 |
-| `gtd/004_todo.md` | ルーティン（運動の曜日・ゴミの日）、カレンダー、タスク |
-| `gtd/004_document/ai-partner/trainer.md` | 運動の予定と物差し（疲れの目安、回数の上限） |
-| `gtd/004_document/life/meals.md`・`deadlines.md` | 定番のご飯と苦手なもの、期限と誕生日 |
+| `gtd/002_todo.md` | ルーティン（運動の曜日・ゴミの日）、カレンダー、タスク |
+| `gtd/006_document/ai-partner/trainer.md` | 運動の予定と物差し（疲れの目安、回数の上限） |
+| `gtd/006_document/life/meals.md`・`deadlines.md` | 定番のご飯と苦手なもの、期限と誕生日 |
 | `logs/logs_YYYY.md` | 睡眠・回復の値・運動の記録（ウェアラブルの値を朝に書く） |
 | `AGENTS.md` | 要確認の領域（機微な情報を置くフォルダ） |
 

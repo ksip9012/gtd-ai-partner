@@ -5,9 +5,9 @@ tags:
 
 # ドキュメント追加時のチェックリスト
 
-`001_inbox.md` の項目を `004_document/` に振り分ける際のルール（Inboxの一次振り分けで「資料・知識」と判断したもの）。
+`001_inbox.md` の項目を `006_document/` に振り分ける際のルール（Inboxの一次振り分けで「資料・知識」と判断したもの）。
 
-Zettelkastenへの昇格はInbox処理の時点では判定しない。`004_document`や`002_project`を見返すタイミングで別途検討する（`zettelkasten/000_rules.md` 参照）。
+Zettelkastenへの昇格はInbox処理の時点では判定しない。`006_document`や`003_project`を見返すタイミングで別途検討する（`zettelkasten/000_rules.md` 参照）。
 
 ## 1. 型を判定する
 
