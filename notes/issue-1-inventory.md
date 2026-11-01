@@ -17,6 +17,26 @@
 | G. v0.2 に回す機能 | Google カレンダーへの写し、朝のニュース、garmin-log の実行 | daily-review・morning-brief・weekly-review | 各 1〜3か所 |
 | H. `AGENTS.md` の作者固有の部分 | git の構成（3つのリポジトリ）、要確認の領域のパス、外出先のポスト | `AGENTS.md` | 節ごと |
 
+## 決めたこと
+
+`decisions/0003-sample-vault-layout.md` に残した（A〜H すべて、下の「直し方の案」のとおり。C の外出先のポストは「任意」ではなく、G と同じく v0.1 から外した）。
+
+## スキルが読むファイル（#2 のサンプル Vault で用意する）
+
+#1 で用意したもの: `AGENTS.md`、`CLAUDE.md`、`me/` のひな形 4つ、`gtd/004_document/ai-partner/trainer.md`・`advice-checklist.md`
+
+#2 で用意するもの:
+
+- `gtd/001_inbox.md`、`gtd/003_done_YYYY-MM.md`、`gtd/004_todo.md`、`gtd/006_someday_maybe.md`、`gtd/007_waiting_for.md`
+- `gtd/002_project/`（`00000000_archive/` も）
+- `gtd/004_document/life/meals.md`、`gtd/004_document/life/deadlines.md`
+- `gtd/005_rules/000_triage_flow.md`、`009_task_add_checklist.md`、`010_document_add_checklist.md`
+- `logs/logs_YYYY.md`、`logs/training.md`、`logs/training_YYYY.jsonl`
+- `reviews/00_trigger_list/001_日次レビュー.md`、`003_月次レビュー.md`
+- `reviews/01_daily/YYYY/YYYY-MM.md`、`reviews/02_weekly/YYYY.md`
+- `zettelkasten/000_rules.md`
+- `me/` の4つを、架空の人物で埋める
+
 ## 直し方の案（決める前）
 
 - A: サンプル Vault を作者と同じフォルダの形にすれば、パスは変えずに済む
