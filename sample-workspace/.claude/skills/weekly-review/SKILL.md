@@ -5,7 +5,7 @@ description: GTDの週次レビューの下書きを作る。「週次レビュ�
 
 # Weekly Review
 
-Vault の現状から週次レビューの下書きを作り、`template.md` の形式でユーザーに提示する。GTD の週次レビュー（Get Clear / Get Current / Get Creative）に沿う。
+ワークスペースの現状から週次レビューの下書きを作り、`template.md` の形式でユーザーに提示する。GTD の週次レビュー（Get Clear / Get Current / Get Creative）に沿う。
 
 ## 対象期間
 
