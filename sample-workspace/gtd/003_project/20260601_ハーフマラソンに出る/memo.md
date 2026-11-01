@@ -12,7 +12,7 @@ tags:
 
 - 週3回（火・木・土）。合わせて週 20km を目安にする
 - 長い距離は土曜に少しずつ延ばす（8月末までに 15km）
-- 物差し（疲れの目安・回数の上限）は `gtd/004_document/ai-partner/trainer.md`
+- 物差し（疲れの目安・回数の上限）は `gtd/006_document/ai-partner/trainer.md`
 
 ## Next Action
 
