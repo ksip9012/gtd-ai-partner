@@ -1,2 +1,11 @@
+# OS
 .DS_Store
+
+# Obsidian の画面の状態
 .obsidian/workspace*.json
+
+# 手元だけの設定と秘密の値
+mise.local.toml
+.env
+.env.*
+!.env.example
