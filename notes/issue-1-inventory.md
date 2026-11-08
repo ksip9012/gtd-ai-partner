@@ -23,9 +23,9 @@
 
 ## スキルが読むファイル（#2 のサンプルのワークスペースで用意する）
 
-#1 で用意したもの: `AGENTS.md`、`CLAUDE.md`、`me/` のひな形 4つ、`gtd/004_document/ai-partner/trainer.md`・`advice-checklist.md`
+Issue #1 で用意したもの: `AGENTS.md`、`CLAUDE.md`、`me/` のひな形 4つ、`gtd/004_document/ai-partner/trainer.md`・`advice-checklist.md`
 
-#2 で用意するもの:
+Issue #2 で用意するもの:
 
 - `gtd/001_inbox.md`、`gtd/003_done_YYYY-MM.md`、`gtd/004_todo.md`、`gtd/006_someday_maybe.md`、`gtd/007_waiting_for.md`
 - `gtd/002_project/`（`00000000_archive/` も）

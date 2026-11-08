@@ -6,7 +6,7 @@ GTD（Getting Things Done）で管理している Markdown のワークスペー
 
 サンプルのワークスペース（`sample-workspace/`）で、「今日は 2026-06-14（日）」として動かしたときのやり取りの抜粋。人物も出来事もすべて作り物。
 
-**朝の秘書（「おはようございます」）**
+### 朝の秘書（「おはようございます」）
 
 ```text
 ## 1. 体の調子
@@ -25,7 +25,7 @@ GTD（Getting Things Done）で管理している Markdown のワークスペー
 2. 鍋（最後に食べたのが 06-09 で、間が空いています）
 ```
 
-**週次レビュー（「週次レビューして」）の「体」の欄**
+### 週次レビュー（「週次レビューして」）の「体」の欄
 
 ```text
 - 運動: ジョグ 3回 計 22.2km（06/09 5.40km、06/11 6.20km、06/13 10.60km）。週 3回・週 20km の両方に届いた
@@ -125,6 +125,20 @@ Claude Code に話しかける。
 ## 動作確認
 
 テストコードはない（スキルは Markdown の手順）。サンプルのワークスペースを一時フォルダに写し、画面なしの Claude Code（`claude -p`）で 4つのスキルを動かして確かめた。結果は [`notes/issue-2-trial.md`](notes/issue-2-trial.md)。
+
+決まった形は、`mise run check` で確かめる（CI と pre-commit も同じものを動かす）。
+
+- スキル・`AGENTS.md` などに書いたワークスペースのパスが、サンプルにあるか（`scripts/check_workspace.py`。日付入りのパターンと、例として書いたものは除く）
+- 各スキルの `SKILL.md` の frontmatter に `name` と `description` があり、`name` がフォルダ名と同じか
+- Markdown の書き方（markdownlint。設定は `.markdownlint-cli2.jsonc`）
+
+```bash
+mise trust && mise install
+pre-commit install   # コミットの前に mise run check を動かす（任意）
+mise run check
+```
+
+スキルを実際に動かしたときの中身（AI の返事が手順どおりか）は、CI では確かめていない。
 
 ## 今後の展望・既知の制約
 

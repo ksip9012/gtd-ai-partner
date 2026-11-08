@@ -1,0 +1,21 @@
+[tools]
+# 版の選び方: Python は最新の 1つ前のマイナー版（作者の dotfiles の decisions/0007）
+python = "3.14"
+# markdownlint-cli2 を動かすため
+node = "26"
+"npm:markdownlint-cli2" = "0.24"
+pre-commit = "4.7"
+
+# 手元・pre-commit・CI で同じチェックを動かす
+[tasks.check]
+description = "ワークスペースのパスと SKILL.md の frontmatter、Markdown の書き方"
+run = [
+  "python scripts/check_workspace.py",
+  "markdownlint-cli2 '**/*.md'",
+]
+
+# 自動で直せる Markdown の書き方を直す。行頭の `#1` のような文は見出しに直されてしまうので、差分を見てから
+# コミットする（「Issue #1」のように書けば起きない）
+[tasks.fix]
+description = "markdownlint で直せるものを直す"
+run = "markdownlint-cli2 --fix '**/*.md'"
