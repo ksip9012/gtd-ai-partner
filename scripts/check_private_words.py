@@ -1,10 +1,15 @@
 """足した行に、個人の情報の語が入っていないかを確かめる.
 
 - 基準のコミットからの差分で足した行と、まだ追跡していないファイルの行を見る
+- 基準のコミットから今までのコミット（マージを除く）の、作者・記録者の名前と
+  メールアドレス、コミットメッセージも見る（ファイルの外の情報なので、差分には
+  出てこない）
 - 語のリストは、環境変数 `PRIVATE_WORDS`（1行 1語）か、
   `$XDG_CONFIG_HOME/gtd-ai-partner/private-words.txt`（既定は `~/.config/...`）から読む。
   空行と `#` で始まる行は飛ばす。大文字・小文字は区別しない
-- 語のリストそのものが個人の情報なので、一致したときもファイル名と行番号だけを出す（decisions/0005）
+- 語のリストそのものが個人の情報なので、一致したときもファイル名と行番号
+  （コミットなら短い ID と、作者・記録者・メッセージのどこか）だけを出す
+  （decisions/0005）
 
 基準のコミットは、環境変数 `PRIVATE_WORDS_BASE` か、なければ `origin/main` との分かれ目。
 見つかったら終了コード 1 で終わる。
@@ -79,6 +84,40 @@ def added_lines(base: str) -> list[tuple[str, int, str]]:
     return lines
 
 
+# コミットの情報のうち見るもの（`git log` の書式と、出すときの名前）
+COMMIT_FIELDS = (
+    ("%an", "作者の名前"),
+    ("%ae", "作者のメールアドレス"),
+    ("%cn", "記録者の名前"),
+    ("%ce", "記録者のメールアドレス"),
+    ("%B", "コミットメッセージ"),
+)
+RECORD_END = "\x1e"
+FIELD_END = "\x1f"
+
+
+def commit_fields(base: str) -> list[tuple[str, str, str]]:
+    """基準のコミットから今までのコミットの情報を (短い ID, どこか, 中身) で返す.
+
+    マージのコミットは外す（PR の CI では、GitHub が作るマージのコミットが HEAD
+    になるため）。
+    """
+    fmt = FIELD_END.join(["%h", *(f for f, _ in COMMIT_FIELDS)]) + RECORD_END
+    # 基準が空の木（全部を確かめるとき）なら、全部のコミットを見る
+    is_tree = git("cat-file", "-t", base).strip() == "tree"
+    span = "HEAD" if is_tree else f"{base}..HEAD"
+    out = git("log", "--no-merges", f"--format={fmt}", span)
+    fields = []
+    for record in out.split(RECORD_END):
+        parts = record.strip("\n").split(FIELD_END)
+        if len(parts) != len(COMMIT_FIELDS) + 1:
+            continue
+        short, *values = parts
+        for (_, name), value in zip(COMMIT_FIELDS, values, strict=True):
+            fields.append((short, name, value))
+    return fields
+
+
 def main() -> int:
     """足した行を語のリストと比べ、見つかった場所を出す."""
     words = load_words()
@@ -92,17 +131,28 @@ def main() -> int:
         print("::error::Secrets の PRIVATE_WORDS が空。語のリストを登録する（README の「開発」）")
         return 1
 
+    def hit(text: str) -> bool:
+        return any(word in text.casefold() for word in words)
+
+    base = base_commit()
     found = [
         f"{path}:{number}"
-        for path, number, text in added_lines(base_commit())
-        if any(word in text.casefold() for word in words)
+        for path, number, text in added_lines(base)
+        if hit(text)
+    ]
+    found += [
+        f"コミット {short} の{name}"
+        for short, name, value in commit_fields(base)
+        if hit(value)
     ]
     if found:
-        print("個人の情報の語を含む行がある（語と行の中身は出さない）:")
+        print("個人の情報の語を含む場所がある（語と中身は出さない）:")
         for place in found:
             print(f"  {place}")
         return 1
-    print(f"足した行に、語のリストの語はなかった（{len(words)} 語）")
+    print(
+        f"足した行とコミットの情報に、語のリストの語はなかった（{len(words)} 語）"
+    )
     return 0
 
 
