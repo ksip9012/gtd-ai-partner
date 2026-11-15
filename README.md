@@ -140,6 +140,16 @@ mise run check
 
 スキルを実際に動かしたときの中身（AI の返事が手順どおりか）は、CI では確かめていない。
 
+足した行に個人の情報の語がないかは、`mise run check-private` で確かめる（`scripts/check_private_words.py`。CI も同じものを動かす）。語のリストはリポジトリの外に置き、一致したときもファイル名と行番号だけを出す（`decisions/0005`）。
+
+```bash
+# 1行 1語。手元のファイルを正にして、同じ中身を CI の Secrets にも入れる
+mkdir -p ~/.config/gtd-ai-partner
+$EDITOR ~/.config/gtd-ai-partner/private-words.txt
+gh secret set PRIVATE_WORDS < ~/.config/gtd-ai-partner/private-words.txt
+mise run check-private
+```
+
 ## 今後の展望・既知の制約
 
 - v0.2 以降: Garmin からのライフログの自動取得、Google カレンダーへの写し、朝のニュース、外出先からの投げ込み
@@ -147,7 +157,7 @@ mise run check
 - 確かめたのは Claude Code（2.1.309）だけ。`AGENTS.md` は Codex なども読むが、スキルの形式は Claude Code のもの
   - 2026-11-08 に足した、朝の秘書の天気と傘と、週次レビューの期限・目安との比較は、まだサンプルで動かしていない
 - CI（`mise run check`）が確かめるのは決まった形（スキルが指すパス・`SKILL.md` の frontmatter・Markdown の書き方）だけ。スキルを動かしたときの中身は見ていない
-- 作者のワークスペースのスキルを正にして、個人の情報を外して写している（`decisions/0002`）。写す前に個人の情報が入っていないかを確かめているが、今は手作業で、CI には入っていない
+- 作者のワークスペースのスキルを正にして、個人の情報を外して写している（`decisions/0002`）。足した行に個人の情報の語がないかは CI でも確かめるが、見つけられるのは語のリストに書いた語だけ（`decisions/0005`）
 - サンプルは git のコミットが 1つだけなので、週次レビューの「2週間以上動いていないもの」（`git log -S` で追加日を見る）は、ふだん使い始めてから効く
 - フィジカル・トレーナーは医療の判断をしない。気になる値が続くときは受診を勧めるだけ
 
