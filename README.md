@@ -164,7 +164,7 @@ mise run check
 
 ここからは、作者が自分のワークスペースからサンプルに写すときの確認。サンプルを試すだけなら要らない。
 
-足した行に個人の情報の語がないかは、`mise run check-private` で確かめる（`scripts/check_private_words.py`。CI も同じものを動かす）。語のリストはリポジトリの外に置き、一致したときもファイル名と行番号だけを出す（[ADR 0005](decisions/0005-private-words-check.md)）。
+足した行と、足したコミットの作者・記録者・メッセージに、個人の情報の語がないかは、`mise run check-private` で確かめる（`scripts/check_private_words.py`。CI も同じものを動かす）。語のリストはリポジトリの外に置き、一致したときも場所（ファイル名と行番号、またはコミットの ID とどこか）だけを出す（[ADR 0005](decisions/0005-private-words-check.md)）。
 
 ```bash
 # 1行 1語。手元のファイルを正にして、同じ中身を CI の Secrets にも入れる
@@ -180,7 +180,7 @@ mise run check-private
 - 日本語で書いたワークスペースを前提にしている
 - 確かめたのは Claude Code（2.1.309 と 2.1.311）だけ。`AGENTS.md` は Codex なども読むが、スキルの形式は Claude Code のもの
 - CI（`mise run check`）が確かめるのは決まった形（スキルが指すパス・`SKILL.md` の frontmatter・Markdown の書き方）だけ。スキルを動かしたときの中身は見ていない
-- 作者のワークスペースのスキルを正にして、個人の情報を外して写している（[ADR 0002](decisions/0002-author-vault-is-source.md)）。足した行に個人の情報の語がないかは CI でも確かめるが、見つけられるのは語のリストに書いた語だけ（[ADR 0005](decisions/0005-private-words-check.md)）
+- 作者のワークスペースのスキルを正にして、個人の情報を外して写している（[ADR 0002](decisions/0002-author-vault-is-source.md)）。足した行とコミットの情報に個人の情報の語がないかは CI でも確かめるが、見つけられるのは語のリストに書いた語だけ（[ADR 0005](decisions/0005-private-words-check.md)）
 - サンプルは git のコミットが 1つだけなので、週次レビューの「2週間以上動いていないもの」（`git log -S` で追加日を見る）は、ふだん使い始めてから効く
 - フィジカル・トレーナーは医療の判断をしない。気になる値が続くときは受診を勧めるだけ
 
