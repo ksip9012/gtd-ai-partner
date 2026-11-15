@@ -1,5 +1,5 @@
-# チェックの中身は mise.toml の [tasks.check] に書く（手元・pre-commit と同じコマンド）。
-# この YAML は「チェックアウト → mise で版をそろえる → mise run check」だけにする（decisions/0003）
+# チェックの中身は mise.toml の [tasks.check]・[tasks.check-private] に書く（手元・pre-commit と同じコマンド）。
+# この YAML は「チェックアウト → mise で版をそろえる → mise run で動かす」だけにする（decisions/0003）
 name: CI
 
 on:
@@ -16,5 +16,13 @@ jobs:
       MISE_TRUSTED_CONFIG_PATHS: ${{ github.workspace }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          # 足した行を基準のコミットと比べるため、履歴をすべて取る
+          fetch-depth: 0
       - uses: jdx/mise-action@v5
       - run: mise run check
+      # 語のリストは Secrets に置き、ログには出さない（decisions/0005）
+      - run: mise run check-private
+        env:
+          PRIVATE_WORDS: ${{ secrets.PRIVATE_WORDS }}
+          PRIVATE_WORDS_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}

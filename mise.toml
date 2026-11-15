@@ -14,6 +14,11 @@ run = [
   "markdownlint-cli2 '**/*.md'",
 ]
 
+# 足した行に個人の情報の語がないか。語のリストはリポジトリの外に置く（decisions/0005）
+[tasks.check-private]
+description = "足した行に、語のリストの語がないか"
+run = "python scripts/check_private_words.py"
+
 # 自動で直せる Markdown の書き方を直す。行頭の `#1` のような文は見出しに直されてしまうので、差分を見てから
 # コミットする（「Issue #1」のように書けば起きない）
 [tasks.fix]
