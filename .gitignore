@@ -4,6 +4,9 @@
 # Obsidian の画面の状態
 .obsidian/workspace*.json
 
+# Python のキャッシュ
+__pycache__/
+
 # 手元だけの設定と秘密の値
 mise.local.toml
 .env
