@@ -26,6 +26,7 @@ description: GTDの週次レビューの下書きを作る。「週次レビュ�
    - Inbox: `gtd/001_inbox.md` の残件数
    - カレンダー・Todo: `gtd/002_todo.md`
      - 「動いていない」の判定は `git log -S '<タスク文言>' -- gtd/002_todo.md` で追加日を見る
+     - 2週間以上動いていないタスクには、1分以内にできる最初の一手を1つ添える（手をどこに置くかまで具体的に。例: 「〇〇のファイルを開き、△△の見出しまで進む」）
    - Waiting For: `gtd/004_waiting_for.md`
    - Someday/Maybe: `gtd/005_someday_maybe.md`
    - プロジェクト: `gtd/003_project/` のフォルダ（`00000000_archive` と、`gtd/005_someday_maybe.md` の「止めているプロジェクト」に載っているものは除く）。各プロジェクト名で `gtd/002_todo.md` に Next Action（`プロジェクト名:` で始まるタスク）があるか照合する
